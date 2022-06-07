@@ -64,3 +64,14 @@ jobs:
           chmod 0755 ProVerBMate-P2RConverter-1.0.jar
           java -jar ProVerBMate-P2RConverter-1.0.jar Verification-Tool-Overview/Tools output.xml
           echo Conversion success.
+
+      # Release
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Auto Transformation"
+          files: |
+            output.xml
+            *.jar
