@@ -1,10 +1,9 @@
 name: ProverB to PDF Convertion
 
 on:
-  push:
-    branches: [ "trigger" ]
-  pull_request:
-    branches: [ "trigger" ]
+  # Auto run every day at 5 AM
+  schedule:
+    - cron: '0 5 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -66,12 +65,16 @@ jobs:
           echo Conversion success.
 
       # Release
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
-          title: "Auto Transformation"
+          title: "${{ steps.date.outputs.date }}"
           files: |
             output.xml
             *.jar
