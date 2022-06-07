@@ -61,6 +61,6 @@ jobs:
       # Convert
       - name: Convert ProVerB to RDF
         run: |
-          chmod 0755 convertor
-          java -jar convertor Verification-Tool-Overview/Tools output.xml
+          chmod 0755 converter
+          java -jar converter Verification-Tool-Overview/Tools output.xml
           echo Conversion success.
