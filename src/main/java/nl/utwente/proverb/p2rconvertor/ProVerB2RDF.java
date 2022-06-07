@@ -9,7 +9,7 @@ public class ProVerB2RDF {
 
     public static void main(String[] args) {
         if (args.length ==2){
-            convert(new File(args[0]), new File(args[1]));
+            convertAll(args[0], new File(args[1]));
         } else {
             System.err.println("Invalid args");
         }
@@ -20,11 +20,11 @@ public class ProVerB2RDF {
                 new File("outputAGREE.xml"));
     }
 
-    private static void convertAll(){
-        var files = getFiles(new ArrayList<>(List.of(new File("src/main/resources/Verification-Tool-Overview/Tools").listFiles())));
+    private static void convertAll(String path, File output){
+        var files = getFiles(new ArrayList<>(List.of(new File(path).listFiles())));
         for (File file : files){
             if (file.isFile()){
-                convert(file, new File("output.xml"));
+                convert(file, output);
             }
             if (file.isDirectory()){
                 System.err.println("Unexpected dir");
