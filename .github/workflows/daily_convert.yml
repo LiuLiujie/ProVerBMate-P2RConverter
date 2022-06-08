@@ -1,7 +1,7 @@
 name: Daily Auto Conversion
 
 on:
-  # Auto run every day at 5 AM
+  # Auto run every day at 3 AM
   schedule:
     - cron: '0 3 * * *'
 
