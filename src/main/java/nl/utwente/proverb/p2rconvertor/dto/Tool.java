@@ -36,7 +36,7 @@ public class Tool {
         for (String repo : URIs){
             for (String str : repo.split(" ")){
                 if (str.contains("github.com")){
-                    repos.add(str);
+                    repos.add(EscapeUtil.URIEscape(str));
                 }
             }
         }
@@ -51,7 +51,7 @@ public class Tool {
         for (String doi : papers){
             for (String str : doi.split(" ")){
                 if (str.contains("doi.org")){
-                    DOIs.add(str);
+                    DOIs.add(EscapeUtil.URIEscape(str));
                 }
             }
         }
