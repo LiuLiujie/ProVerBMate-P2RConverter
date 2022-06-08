@@ -49,16 +49,17 @@ jobs:
           distribution: 'adopt'
 
       # Poll the ProverB
-      - name: Pull ProVerB
+      - name: Pull ProVerB and Ontology
         run: |
           git clone https://github.com/LiuLiujie/Verification-Tool-Overview.git
+          git clone https://github.com/LiuLiujie/ProVerB-Ontology.git
           echo Clone ProVerB success
 
       # Convert
       - name: Convert ProVerB to RDF
         run: |
           chmod 0755 ProVerBMate-P2RConverter-1.0.jar
-          java -jar ProVerBMate-P2RConverter-1.0.jar Verification-Tool-Overview/Tools output.xml
+          java -jar ProVerBMate-P2RConverter-1.0.jar Verification-Tool-Overview/Tools ProVerB-Ontology/ontology.owl
           echo Conversion success.
 
       # Release
@@ -73,5 +74,5 @@ jobs:
           prerelease: false
           title: "${{ steps.date.outputs.date }}"
           files: |
-            output.xml
+            ProVerB-Ontology/ontology.owl
             *.jar
