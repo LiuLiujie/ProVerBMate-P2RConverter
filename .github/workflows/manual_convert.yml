@@ -1,10 +1,6 @@
-name: ProverB to PDF Convertion
+name: Manual Conversion
 
 on:
-  # Auto run every day at 5 AM
-  schedule:
-    - cron: '0 5 * * *'
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
