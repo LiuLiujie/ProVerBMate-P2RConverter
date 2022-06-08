@@ -1,73 +1,56 @@
 package nl.utwente.proverb.p2rconvertor.template;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.util.List;
+
 public class InstanceTemplate {
 
-    public static String convertToolInstance(String iName, String properties) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("<owl:NamedIndividual rdf:about=\"http://slebok.github.io/proverb/ontology#").append(iName).append("\">").append("\n");
-        builder.append("<rdf:type rdf:resource=\"http://slebok.github.io/proverb/ontology#Tool\"/>").append("\n");
-        builder.append(properties);
-        builder.append("</owl:NamedIndividual>").append("\n");
-        return builder.toString();
+    private InstanceTemplate() { }
+
+    public static Element convertToolInstance(Document document, String iName, List<Element> elementList) {
+        var e = createNamedIndividual(document, "http://slebok.github.io/proverb/ontology#"+iName);
+        e.appendChild(createToolType(document));
+        for (var element : elementList){
+            e.appendChild(element);
+        }
+        return e;
     }
 
-    /**
-     *
-     * @param ghURL         github URL
-     *
-     * @return              OWL instance
-     */
-    public static String convertGitHubInstance(String ghURL) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("<owl:NamedIndividual rdf:about=\"").append(ghURL).append("\">").append("\n");
-        builder.append("<rdf:type rdf:resource=\"http://slebok.github.io/proverb/ontology#Repository\"/>").append("\n");
-        builder.append("</owl:NamedIndividual>").append("\n");
-        return builder.toString();
+    public static Element convertGitHubInstance(Document document, String ghURL) {
+        var e = createNamedIndividual(document, ghURL);
+        e.appendChild(createRepositoryType(document));
+        return e;
     }
 
-    /**
-     *
-     * @param ghURL         github URL
-     * @param type          CodeContributor or Repository
-     * @param properties    name, abstract, contributor(for type Repo),
-     *                     sameAs(for possible relationship in CodeContributor and Author)
-     *
-     * @return              OWL instance
-     */
-    public static String convertGitHubInstance(String ghURL, String type, String properties) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("<owl:NamedIndividual rdf:about=\"").append(ghURL).append("\">").append("\n");
-        builder.append("<rdf:type rdf:resource=\"http://slebok.github.io/proverb/ontology#").append(type).append("\"/>").append("\n");
-        builder.append(properties);
-        builder.append("</owl:NamedIndividual>").append("\n");
-        return builder.toString();
+    public static Element convertDoiInstance(Document document, String doiURL) {
+        var e = createNamedIndividual(document, doiURL);
+        e.appendChild(createArticleType(document));
+        return e;
     }
 
-    /**
-     *
-     * @param doiURL        full url with doi
-     * @param type          Article
-     * @param properties    name, abstract
-     * @return              OWL instance
-     */
-    public static String convertDoiInstance(String doiURL, String type, String properties){
-        StringBuilder builder = new StringBuilder();
-        builder.append("<owl:NamedIndividual rdf:about=\"").append(doiURL).append("\">").append("\n");
-        builder.append("<rdf:type rdf:resource=\"http://slebok.github.io/proverb/ontology#").append(type).append("\"/>").append("\n");
-        builder.append("</owl:NamedIndividual>").append("\n");
-        return builder.toString();
+    private static Element createNamedIndividual(Document document, String about){
+        var e = document.createElement("owl:NamedIndividual");
+        e.setAttribute("rdf:about", about);
+        return e;
     }
 
-    /**
-     *
-     * @param doiURL        full url with doi
-     * @return              OWL instance
-     */
-    public static String convertDoiInstance(String doiURL){
-        StringBuilder builder = new StringBuilder();
-        builder.append("<owl:NamedIndividual rdf:about=\"").append(doiURL).append("\">").append("\n");
-        builder.append("<rdf:type rdf:resource=\"http://slebok.github.io/proverb/ontology#Article\"/>").append("\n");
-        builder.append("</owl:NamedIndividual>").append("\n");
-        return builder.toString();
+    private static Element createToolType(Document document){
+        var e = document.createElement("rdf:type");
+        e.setAttribute("rdf:resource", "http://slebok.github.io/proverb/ontology#Tool");
+        return e;
+    }
+
+    private static Element createRepositoryType(Document document){
+        var e = document.createElement("rdf:type");
+        e.setAttribute("rdf:resource", "http://slebok.github.io/proverb/ontology#Repository");
+        return e;
+    }
+
+    private static Element createArticleType(Document document){
+        var e = document.createElement("rdf:type");
+        e.setAttribute("rdf:resource", "http://slebok.github.io/proverb/ontology#Article");
+        return e;
     }
 }
