@@ -3,7 +3,7 @@ name: Daily Auto Conversion
 on:
   # Auto run every day at 5 AM
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '0 3 * * *'
 
 jobs:
   build:
