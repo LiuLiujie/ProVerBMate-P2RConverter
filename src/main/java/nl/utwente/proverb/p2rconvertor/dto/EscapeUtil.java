@@ -35,7 +35,7 @@ public class EscapeUtil {
 
     private static String escapeHTTP(String string){
         if (string.contains("http:")){
-            return "https:";
+            return string.replace("http:", "https:");
         }
         return string;
     }
