@@ -8,6 +8,7 @@ public class EscapeUtil {
         string = escapeURLSpecialChar(string);
         string = escapeURLEndWithSpecialChar(string);
         string = escapeDXDOI(string);
+        string = escapeHTTP(string);
         return string;
     }
 
@@ -28,6 +29,13 @@ public class EscapeUtil {
     private static String escapeDXDOI(String string){
         if (string.contains("dx.doi")){
             return string.replace("dx.doi", "doi");
+        }
+        return string;
+    }
+
+    private static String escapeHTTP(String string){
+        if (string.contains("http:")){
+            return "https:";
         }
         return string;
     }
