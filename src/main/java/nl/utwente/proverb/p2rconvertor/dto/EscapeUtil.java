@@ -7,7 +7,7 @@ public class EscapeUtil {
     public static String escapeURL(String string){
         string = escapeURLSpecialChar(string);
         string = escapeURLEndWithSpecialChar(string);
-        string = escapeEXDOI(string);
+        string = escapeDXDOI(string);
         return string;
     }
 
@@ -25,9 +25,9 @@ public class EscapeUtil {
         return string;
     }
 
-    private static String escapeEXDOI(String string){
-        if (string.contains("ex.doi")){
-            return string.replace("ex.doi", "doi");
+    private static String escapeDXDOI(String string){
+        if (string.contains("dx.doi")){
+            return string.replace("dx.doi", "doi");
         }
         return string;
     }
