@@ -58,7 +58,7 @@ jobs:
       - name: Convert ProVerB to RDF
         run: |
           chmod 0755 ProVerBMate-P2RConverter-1.0.jar
-          java -jar ProVerBMate-P2RConverter-1.0.jar Verification-Tool-Overview/Tools ProVerB-Ontology/ontology.owl
+          java -jar ProVerBMate-P2RConverter-1.0.jar Verification-Tool-Overview/Tools ProVerB-Ontology/ProVerB_1.3.0.owl
           echo Conversion success.
 
       # Release
