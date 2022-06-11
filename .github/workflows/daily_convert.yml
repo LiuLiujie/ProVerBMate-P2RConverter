@@ -59,7 +59,7 @@ jobs:
       - name: Convert ProVerB to RDF
         run: |
           chmod 0755 ProVerBMate-P2RConverter-1.0.jar
-          java -jar ProVerBMate-P2RConverter-1.0.jar Verification-Tool-Overview/Tools ProVerB-Ontology/ProVerB_1.3.0.owl
+          java -jar ProVerBMate-P2RConverter-1.0.jar Verification-Tool-Overview/Tools ProVerB-Ontology/ProVerB.owl
           echo Conversion success.
 
       # Release
@@ -74,5 +74,5 @@ jobs:
           prerelease: false
           title: "${{ steps.date.outputs.date }}"
           files: |
-            ProVerB-Ontology/ontology.owl
+            ProVerB-Ontology/ProVerB.owl
             *.jar
