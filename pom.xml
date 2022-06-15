@@ -6,7 +6,7 @@
 
     <groupId>nl.utwente.proverb</groupId>
     <artifactId>ProVerBMate-P2RConverter</artifactId>
-    <version>1.0</version>
+    <version>1.4.0</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
