@@ -73,5 +73,5 @@ jobs:
           prerelease: false
           title: "${{ steps.date.outputs.date }}"
           files: |
-            ProVerB-Ontology/ProVerB.owl
+            ProVerB-Ontology/ProVerB_1.4.0.owl
             *.jar
