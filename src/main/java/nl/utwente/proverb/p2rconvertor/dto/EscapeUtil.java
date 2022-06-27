@@ -20,7 +20,7 @@ public class EscapeUtil {
     }
 
     private static String escapeURLEndWithSpecialChar(String string){
-        if (string.endsWith("/")){
+        if (string.endsWith("/") || string.endsWith("*")){
             return string.substring(0, string.length()-1);
         }
         return string;
