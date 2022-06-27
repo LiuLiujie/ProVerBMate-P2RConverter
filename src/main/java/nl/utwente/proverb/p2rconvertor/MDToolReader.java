@@ -4,6 +4,7 @@ import nl.utwente.proverb.p2rconvertor.dto.Tool;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -23,32 +24,28 @@ public class MDToolReader {
         Tool tool = new Tool();
         try (var reader = new InputStreamReader(new FileInputStream(input));
              var br = new BufferedReader(reader)){
-            String line = "";
-            String name = "";
+            String line;
+            String name;
             line = br.readLine();
             while (line != null) {
                 if (line.startsWith(NAME)) {
                     name = readTilEmpty(br).stream().findFirst().orElse("UNKNOWN TOOL");
                     tool.setName(name);
-                    System.err.println("Reading tool: "+ name);
                 } else if (line.startsWith(URIS)) {
-                    List<String> URIs = readTilEmpty(br);
-                    tool.setURIs(URIs);
-                    System.err.println("Reading " + name + "'s URIs");
+                    List<String> urIs = readTilEmpty(br);
+                    tool.setURIs(urIs);
                 } else if (line.startsWith(PAPERS)) {
                     List<String> papers = readTilEmpty(br);
                     tool.setPapers(papers);
-                    System.err.println("Reading " + name + "'s papers");
                 } else if (line.startsWith(META)) {
                     List<String> meta = readTilEmpty(br);
                     tool.setMeta(meta);
-                    System.err.println("Reading " + name + "'s meta");
                 }
                 line = br.readLine();
             }
         } catch (IOException e) {
             System.err.println("Reading file error:" +e.getMessage());
-            System.err.println(e.getStackTrace());
+            System.err.println(Arrays.toString(e.getStackTrace()));
         }
         return tool;
     }
