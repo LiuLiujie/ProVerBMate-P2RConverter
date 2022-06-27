@@ -33,7 +33,7 @@ public class MDToolReader {
                     tool.setName(name);
                 } else if (line.startsWith(URIS)) {
                     List<String> urIs = readTilEmpty(br);
-                    tool.setURIs(urIs);
+                    tool.setUrIs(urIs);
                 } else if (line.startsWith(PAPERS)) {
                     List<String> papers = readTilEmpty(br);
                     tool.setPapers(papers);

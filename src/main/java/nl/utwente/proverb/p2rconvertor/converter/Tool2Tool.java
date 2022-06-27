@@ -6,7 +6,6 @@ import nl.utwente.proverb.p2rconvertor.MDToolReader;
 import nl.utwente.proverb.p2rconvertor.dto.Tool;
 import nl.utwente.proverb.p2rconvertor.dto.ontology.PROVERB;
 import nl.utwente.proverb.p2rconvertor.service.OntologyService;
-import nl.utwente.proverb.p2rconvertor.service.impl.OntologyServiceImpl;
 import org.apache.jena.rdf.model.Resource;
 
 import java.io.*;
@@ -137,20 +136,16 @@ public class Tool2Tool implements Converter {
     }
 
     private void convertRepositories(Resource toolResource, List<String> repos){
-        if (repos != null){
-            for (String str : repos){
-                var repoResource = ontologyService.createRepository(str);
-                ontologyService.addProperty(toolResource, PROVERB.P_REPOSITORY, repoResource);
-            }
+        for (String str : repos){
+            var repoResource = ontologyService.createRepository(str);
+            ontologyService.addProperty(toolResource, PROVERB.P_REPOSITORY, repoResource);
         }
     }
 
     private void convertDOIs(Resource toolResource, List<String> doIs){
-        if (doIs != null){
-            for (String str : doIs){
-                var doiResource = ontologyService.createArticle(str);
-                ontologyService.addProperty(toolResource, PROVERB.P_RELATED_PAPER, doiResource);
-            }
+        for (String str : doIs){
+            var doiResource = ontologyService.createArticle(str);
+            ontologyService.addProperty(toolResource, PROVERB.P_RELATED_PAPER, doiResource);
         }
     }
 }
